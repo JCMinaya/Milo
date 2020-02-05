@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
-import { ProductComponent } from './product/product.component';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [
