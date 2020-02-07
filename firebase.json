@@ -11,6 +11,10 @@
     ],
     "rewrites": [
       {
+        "source": "/api/**",
+        "function": "webApi"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

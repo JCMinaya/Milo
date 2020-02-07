@@ -4,14 +4,36 @@ import * as express from 'express';
 import * as bodyParser from "body-parser";
 
 admin.initializeApp(functions.config().firebase);
+const db = admin.firestore();
 
 const app = express();
-const main = express();
+app.use(bodyParser.json());
 
-main.use('/api/v1', app);
-main.use(bodyParser.json());
-export const webApi = functions.https.onRequest(main);
+app.get('/', (req, res) => {
+    res.send("HOLA");
+});
 
 app.get('/warm', (req, res) => {
-    res.send('Calentando para la pelea');
-})
+    res.send("klk");
+});
+
+app.post('/product', async (req, res) => {
+    const productRef = await db.collection('products').add(req.body);
+    const product = await productRef.get();
+    
+    res.json({
+        id: productRef.id,
+        data: product.data()
+    });
+    
+});
+
+app.route('/products/:id')
+    .get(async (req, res) => {
+        
+    })
+    .put(async (req, res) => {
+        res.send('Update the book')
+    })
+
+exports.webApi = functions.https.onRequest(app);
