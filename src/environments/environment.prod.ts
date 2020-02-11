@@ -9,5 +9,6 @@ export const environment = {
     messagingSenderId: "524479414175",
     appId: "1:524479414175:web:ebcadcf77c50ddadd447aa",
     measurementId: "G-Y50MH6BV2T"
-  }
+  },
+  apiURL: "https://us-central1-milo-fa1b1.cloudfunctions.net/webApi/"
 };

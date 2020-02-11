@@ -1,0 +1,24 @@
+<table class="table table-sm table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Articulo</th>
+      <th scope="col">Marca</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Descripción</th>
+      <th scope="col">Precio de Compra</th>
+      <th scope="col">Precio de Venta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of productList; let i = index">
+      <th scope="row">{{i}}</th>
+      <td>{{product.articulo}}</td>
+      <td>{{product.marca}}</td>
+      <td>{{product.cantidad}}</td>
+      <td>{{product.descripcion}}</td>
+      <td>{{product.precioCompra}}</td>
+      <td>{{product.precioVenta}}</td>
+    </tr>
+  </tbody>
+</table>

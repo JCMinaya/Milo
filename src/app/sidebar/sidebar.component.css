@@ -40,26 +40,24 @@
   }
   
   .sidebar .nav-link.active {
-    color: darkblue;
+    background-color: lightgray;
+    border-left: 5px solid #333333;
   }
   
   .sidebar .nav-link:hover .material-icons,
   .sidebar .nav-link.active .material-icons {
-    color: gray;
+    color: black;
   }
+
   .material-icons {
     vertical-align: bottom;
   }
 
-  .sidebar .nav-item:hover  {
+  .sidebar .nav-link:hover{
     background-color: darkgray;
     border-left: 5px solid #333333;
   }
 
-  .sidebar .nav-link:active  {
-    background-color: darkgray;
-    border-left: 5px solid #333333;
-  }
   .sidebar-heading {
     font-size: .75rem;
     text-transform: uppercase;
