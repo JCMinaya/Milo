@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerComponent implements OnInit {
 
+  checkBoxProveedor = false;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  proveedorOnChange(){
+      
   }
 
 }

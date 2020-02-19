@@ -1,0 +1,25 @@
+<table class="table table-sm table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">RNC</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Número Teléfono</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customerList; let i = index">
+        <th scope="row">{{i}}</th>
+        <td>{{customer.nombre}}</td>
+        <td>{{customer.rnc}}</td>
+        <td>{{customer.tipo}}</td>
+        <td>{{customer.correo}}</td>
+        <td>{{customer.telefonoFijo}}</td>
+      </tr>
+    </tbody>
+    <div class="card-footer pb-0 pt-3">
+      <jw-pagination [items]="items" (changePage)="onChangePage($event)"></jw-pagination>
+    </div>
+  </table>

@@ -1,14 +1,20 @@
 <!-- Button trigger modal -->
 <div class="container">
     <div class="row">
-        <input class="form-control col-md-6" type="text" placeholder="Buscar producto" aria-label="Search">
+        <!-- <input class="form-control col-md-6" type="text" placeholder="Buscar producto" aria-label="Search"> -->
+        <mat-form-field class="example-full-width col-md-6">
+            <mat-label>Buscar producto</mat-label>
+            <input matInput placeholder="Ex. Lapiz" value="">
+        </mat-form-field>
+
         <div class="col-md-6">
-            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#productCreate">
-                Crear Producto
-            </button>
+            <!-- <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#productCreate"> -->
+                <!-- Crear Producto
+            </button> -->
+            <button mat-raised-button class="float-right" color="primary" data-toggle="modal" data-target="#productCreate">
+                Crear Producto</button>
         </div>
     </div>
 </div>
-<hr>
 <app-product-create></app-product-create>
 <app-product-list></app-product-list>

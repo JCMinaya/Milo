@@ -1,84 +1,58 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import { singlePost, getCollection, multiplePosts, getDocument } from './controllers'
 import * as express from 'express';
 import * as bodyParser from "body-parser";
 import * as cors from "cors";
 
 admin.initializeApp(functions.config().firebase);
-const db = admin.firestore();
+export const db = admin.firestore();
 
-const app = express();
+export const app = express();
 app.use(bodyParser.json());
 
+var whitelist = ['https://milo-fa1b1.firebaseapp.com', 'http://localhost:4200']
 var corsOptions = {
-    origin: 'http://localhost:4200',
-    optionsSuccessStatus: 200 
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
   }
-app.use(cors(corsOptions));
-
-app.get('/', (req, res) => {
-    res.send("HOLA");
-});
-
-app.get('/warm', (req, res) => {
-    res.send("klk");
-});
+}
+app.use('*', cors(corsOptions));
 
 app.post('/product', async (req, res) => {
-    const key = req.body["codigo"].toString();
-    await db.collection('products').doc(key).set(req.body)
-    .then(data => {
-        res.send(key)
-    })
-    .catch(error => {
-        res.send( "Error adding Product." + error)
-    })
+    singlePost(req, res, "id", "products")
 })
 
 app.route('/products')
     .post((req, res) => {
-        req.body.forEach(async product => {
-            const key = product["codigo"].toString();
-            await db.collection('products').doc(key).set(product)
-            .then(data => {
-                res.send(product)
-            })
-            .catch(error => {
-                res.send( "Error adding Product." + error)
-            })
-        })
+        multiplePosts(req, res, "id", "products")
     })
-    .get(async (req, res) => {
-        db.collection('products').get()
-        .then(data => {
-            let products = []
-            data.forEach(doc => products.push(doc.data()))
-            if (products.length) {
-                res.status(200).json(products)
-            } else {
-                res.status(404).json({detail: 'No records found'})
-            }
-        })
-        .catch(error => {
-            console.log("Error getting Products.")
-        })
+    .get((req, res) => {
+        getCollection(res, "products");
     });
 
 app.route('/products/:id')
-    .get(async (req, res) => {
-        var docRef = db.collection("products").doc(req.params.id);
-        docRef.get().then((doc) => {
-            if (doc.exists) {
-                return res.status(200).json(doc.data());
-            } else {
-                return res.status(400).json({"message":"Product ID not found."});
-            }
-        }).catch((error) => {
-            return res.status(400).json({"message":"Unable to connect to Firestore."});
-        });
+    .get((req, res) => {
+        getDocument(req, res, "products")
     })
-    .put(async (req, res) => {
+    .put((req, res) => {
         res.send('Update the book')
     });
+
+app.route('/customers')
+    .post((req, res) => {
+        multiplePosts(req, res, "id", "customers");
+    })
+    .get((req, res) => {
+        getCollection(res, "customers");
+    });
+
+app.post('/customer', async (req, res) => {
+    singlePost(req, res, "id", "customers")
+})
 
 exports.webApi = functions.https.onRequest(app);
