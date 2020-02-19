@@ -17,7 +17,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class ProductListComponent implements OnInit {
 
-  private productList: Product[] = [];
+  productList: Product[] = [];
   columnsToDisplay = ['nombre', 'marca', 'codigo', 'itbis', 'ubicacion'];
   expandedElement: Product | null;
 

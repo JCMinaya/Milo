@@ -9,7 +9,7 @@ import { Customer } from '../customer';
 })
 export class CustomerListComponent implements OnInit {
 
-  private customerList: Customer[] = []; 
+  customerList: Customer[] = []; 
   items = [];
   pageOfItems: Array<any>;
 

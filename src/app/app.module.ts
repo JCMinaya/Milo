@@ -24,16 +24,17 @@ import { ProductCreateComponent } from './main/product/product-create/product-cr
 import { CustomerListComponent } from './main/customer/customer-list/customer-list.component';
 import { CustomerCreateComponent } from './main/customer/customer-create/customer-create.component';
 import { CustomerService } from './main/customer/customer.service';
-import { JwPaginationComponent } from 'jw-angular-pagination';
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 const appRoutes : Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'orders', component: OrderComponent},
   {path: 'products', component: ProductComponent},
   {path: 'customers', component: CustomerComponent},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent}
 ]
 
 @NgModule({
@@ -49,8 +50,9 @@ const appRoutes : Routes = [
     ProductCreateComponent,
     CustomerListComponent,
     CustomerCreateComponent,
-    JwPaginationComponent,
-    AuthComponent
+    AuthComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

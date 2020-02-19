@@ -3,18 +3,19 @@
     <div class="row">
         <div class="col-10">
             <div class="form-group form-inline">
-                <input class="form-control col-5" type="text" placeholder="Buscar entidad" aria-label="Search">
+                <mat-form-field class="example-full-width col-md-6">
+                    <mat-label>Buscar entidad</mat-label>
+                    <input matInput placeholder="Ex. Globatec, SRL" value="">
+                </mat-form-field>
                 <label for="Filter" class="ml-2 mr-2">Filtros: </label>
                 <mat-checkbox (change)="proveedorOnChange()" [(ngModel)]="checkBoxProveedor">Proveedor</mat-checkbox>
             </div>
         </div>
         <div class="col-2">
-            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#productCreate">
-                Crear Entidad
-            </button>
+            <button mat-raised-button class="float-right" color="primary" data-toggle="modal" data-target="#customerCreate">
+                Crear Entidad</button>
         </div>
     </div>
 </div>
-<hr>
 <app-customer-create></app-customer-create>
 <app-customer-list></app-customer-list>
