@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
@@ -8,7 +7,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { MaterialModule } from './material.module';
 import { FormsModule } from '@angular/forms'; 
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
+import { Routes, RouterModule } from '@angular/router';
+import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -24,18 +24,29 @@ import { ProductCreateComponent } from './main/product/product-create/product-cr
 import { CustomerListComponent } from './main/customer/customer-list/customer-list.component';
 import { CustomerCreateComponent } from './main/customer/customer-create/customer-create.component';
 import { CustomerService } from './main/customer/customer.service';
-import { AuthComponent } from './auth/auth.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
+import { LoggedInGuard } from 'ngx-auth-firebaseui';
+
 
 const appRoutes : Routes = [
-  {path: 'home', component: HomeComponent},
-  {path: 'orders', component: OrderComponent},
-  {path: 'products', component: ProductComponent},
-  {path: 'customers', component: CustomerComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent}
-]
+  {
+  path: "",  
+  canActivate: [LoggedInGuard],
+  children: [
+    {path: 'home', component: HomeComponent},
+    {path: 'orders', component: OrderComponent},
+    { path: 'products', component: ProductComponent,
+      children: [
+        {
+          path: '',
+          children: [
+            { path: 'create', component: ProductCreateComponent },
+            { path: 'list', component: ProductListComponent }
+          ]
+        }]
+    },
+    {path: 'customers', component: CustomerComponent}
+  ]
+}]
 
 @NgModule({
   declarations: [
@@ -49,29 +60,19 @@ const appRoutes : Routes = [
     ProductListComponent,
     ProductCreateComponent,
     CustomerListComponent,
-    CustomerCreateComponent,
-    AuthComponent,
-    LoginComponent,
-    RegisterComponent
+    CustomerCreateComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    RouterModule.forRoot(appRoutes),
     HttpClientModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxAuthFirebaseUIModule.forRoot({
-      apiKey: "AIzaSyAMkIJxLURgGABsijrSEfByJ6TbZ5bWuJE",
-      authDomain: "milo-fa1b1.firebaseapp.com",
-      databaseURL: "https://milo-fa1b1.firebaseio.com",
-      projectId: "milo-fa1b1",
-      storageBucket: "milo-fa1b1.appspot.com",
-      messagingSenderId: "524479414175"
-    })
+    RouterModule.forRoot(appRoutes),
+    AuthModule
   ],
   providers: [ProductService, CustomerService],
   bootstrap: [AppComponent]
