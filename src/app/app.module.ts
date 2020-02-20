@@ -14,16 +14,17 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { environment } from '../environments/environment';
-import { ProductComponent } from './main/product/product.component';
-import { HomeComponent } from './main/home/home.component';
-import { OrderComponent } from './main/order/order.component';
-import { CustomerComponent } from './main/customer/customer.component';
-import { ProductListComponent } from './main/product/product-list/product-list.component';
-import { ProductService } from './main/product/product.service';
-import { ProductCreateComponent } from './main/product/product-create/product-create.component';
-import { CustomerListComponent } from './main/customer/customer-list/customer-list.component';
-import { CustomerCreateComponent } from './main/customer/customer-create/customer-create.component';
-import { CustomerService } from './main/customer/customer.service';
+import { ProductComponent } from './dashboard/product/product.component';
+import { HomeComponent } from './dashboard/home/home.component';
+import { OrderComponent } from './dashboard/order/order.component';
+import { CustomerComponent } from './dashboard/customer/customer.component';
+import { ProductListComponent } from './dashboard/product/product-list/product-list.component';
+import { ProductService } from './dashboard/product/product.service';
+import { ProductCreateComponent } from './dashboard/product/product-create/product-create.component';
+import { CustomerListComponent } from './dashboard/customer/customer-list/customer-list.component';
+import { CustomerCreateComponent } from './dashboard/customer/customer-create/customer-create.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CustomerService } from './dashboard/customer/customer.service';
 import { LoggedInGuard } from 'ngx-auth-firebaseui';
 
 
@@ -60,7 +61,8 @@ const appRoutes : Routes = [
     ProductListComponent,
     ProductCreateComponent,
     CustomerListComponent,
-    CustomerCreateComponent
+    CustomerCreateComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
