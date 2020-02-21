@@ -29,14 +29,15 @@ import { LoggedInGuard } from 'ngx-auth-firebaseui';
 
 
 const appRoutes : Routes = [
+  { path: '', redirectTo: 'dashboard/home', pathMatch: 'full' },
   {
-  path: "",  
-  canActivate: [LoggedInGuard],
-  children: [
-    {path: 'home', component: HomeComponent},
-    {path: 'orders', component: OrderComponent},
-    { path: 'products', component: ProductComponent,
-      children: [
+    path: "dashboard",  component: DashboardComponent,
+    canActivate: [LoggedInGuard],
+    children: [
+      {path: 'home', component: HomeComponent},
+      {path: 'orders', component: OrderComponent},
+      { path: 'products', component: ProductComponent,
+        children: [
         {
           path: '',
           children: [
@@ -44,8 +45,9 @@ const appRoutes : Routes = [
             { path: 'list', component: ProductListComponent }
           ]
         }]
-    },
-    {path: 'customers', component: CustomerComponent}
+      },
+      {path: 'customers', component: CustomerComponent},
+      { path: '**', component: HomeComponent }
   ]
 }]
 

@@ -9,17 +9,14 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
 const authRoutes : Routes = [
-  { path: 'auth', component: AuthComponent,
-  canActivate: [LoggedInGuard],
+  { path: 'auth', 
+    component: AuthComponent,
+    // canActivate: [LoggedInGuard],
     children: [
-      {
-        path: '',
-        children: [
-          { path: 'login', component: LoginComponent },
-          { path: 'register', component: RegisterComponent }
-        ]
-      }
-    ]}
+      { path: '', component: LoginComponent, outlet: 'auth' },
+      { path: 'register', component: RegisterComponent, outlet: 'auth' }
+    ]
+  }
 ]
 
 @NgModule({
@@ -42,8 +39,8 @@ const authRoutes : Routes = [
     },
     () => "appFactoryName",
     {
-      authGuardFallbackURL: 'products',
-      authGuardLoggedInURL: 'login'
+      authGuardFallbackURL: 'auth',
+      authGuardLoggedInURL: 'dashboard/home'
     }),
     RouterModule.forChild(authRoutes)
   ],

@@ -1,3 +1,6 @@
 <ngx-auth-firebaseui-login 
-    [providers]="[providers.Google]">
+    [providers]="[providers.Google]"
+    (onSuccess)="onLoginSuccess($event)"
+    (onError)="printError()"
+    (onCreateAccountRequested)="onCreateAccountRequested()">
 </ngx-auth-firebaseui-login>

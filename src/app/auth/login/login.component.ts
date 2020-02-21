@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {AuthProvider} from 'ngx-auth-firebaseui';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +11,23 @@ export class LoginComponent implements OnInit {
 
   providers = AuthProvider;
 
-  constructor() {  }
+  constructor(private router: Router) {  }
 
   ngOnInit() {
   }
 
+  onCreateAccountRequested(){
+    this.router.navigateByUrl('/auth/(auth:register)');
+  }
 
+  onLoginSuccess(event){
+    this.router.navigateByUrl('/dashboard/home');
+    console.log(event);
+    
+  }
 
+  printError()
+  {
+    
+  }
 }
