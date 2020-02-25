@@ -1,22 +1,42 @@
-<table class="table table-sm table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">RNC</th>
-        <th scope="col">Tipo</th>
-        <th scope="col">Correo</th>
-        <th scope="col">Número Teléfono</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let customer of customerList; let i = index">
-        <th scope="row">{{i}}</th>
-        <td>{{customer.nombre}}</td>
-        <td>{{customer.rnc}}</td>
-        <td>{{customer.tipo}}</td>
-        <td>{{customer.correo}}</td>
-        <td>{{customer.telefonoFijo}}</td>
-      </tr>
-    </tbody>
-  </table>
+<!-- <mat-slide-toggle (change)="proveedorFilterOnChange()">Proveedores</mat-slide-toggle>&nbsp;&nbsp;
+<mat-slide-toggle (change)="clienteFilterOnChange()">Clientes</mat-slide-toggle>&nbsp;&nbsp;
+<mat-slide-toggle (change)="hibridoFilterOnChange()">Híbridos</mat-slide-toggle> -->
+<mat-form-field class="example-full-width">
+  <mat-label>Buscar entidad</mat-label>
+  <input matInput (keyup)="applySearchFilter($event)" placeholder="Ex. Globatec, SRL">
+</mat-form-field>
+<table mat-table
+       [dataSource]="customerList" multiTemplateDataRows
+       class="mat-elevation-z8">
+  <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
+    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+    <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+      <div class="example-element-detail"
+           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <div class="example-element-diagram">
+          <div class="example-element-position"> {{element.id}} </div>
+          <div class="example-element-symbol"> {{element.ncfTipo}} </div>
+          <div class="example-element-name"> {{element.nombre}} </div>
+          <div class="example-element-weight"> {{element.tipo}} </div>
+        </div>
+        <div class="example-element-description">
+          {{element.descripcion}}
+          <span class="example-element-description-attribution"> -- Cliente </span>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>

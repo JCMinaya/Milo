@@ -2,18 +2,17 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from  "@angular/fire/auth";
 import { Router } from '@angular/router';
 import { User } from  'firebase';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  user: User;
   constructor(private router:Router, private afAuth:AngularFireAuth) { 
     this.afAuth.authState.subscribe(user => {
       if (user){
-        this.user = user;
-        localStorage.setItem('user', JSON.stringify(this.user));
+        localStorage.setItem('user', JSON.stringify(user));
       } else {
         localStorage.setItem('user', null);
       }
@@ -26,8 +25,9 @@ export class AuthService {
   }
 
   async logout(){
-    await this.afAuth.auth.signOut();
-    localStorage.removeItem('user');
+    await this.afAuth.auth.signOut().then(() => {
+      localStorage.removeItem('user');
+   })
     this.router.navigate(['auth']);
   }
 }

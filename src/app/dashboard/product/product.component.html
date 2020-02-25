@@ -1,16 +1,18 @@
 <!-- Button trigger modal -->
 <div class="container">
     <div class="row">
-        <mat-form-field class="example-full-width col-md-6">
-            <mat-label>Buscar producto</mat-label>
-            <input matInput placeholder="Ex. Lapiz" value="">
-        </mat-form-field>
-
-        <div class="col-md-6">
+        <div class="col-10 form-inline">
+            <h2> 
+                <i class="material-icons">shopping_cart</i> 
+            </h2>
+            <h3>Productos</h3>
+        </div>
+        <div class="col-2">
             <button mat-raised-button class="float-right" color="primary" data-toggle="modal" data-target="#productCreate">
                 Crear Producto</button>
         </div>
     </div>
 </div>
+<mat-divider></mat-divider>
 <app-product-create></app-product-create>
 <app-product-list></app-product-list>

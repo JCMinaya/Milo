@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Product } from '../product.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-product-list',
@@ -17,22 +18,41 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class ProductListComponent implements OnInit {
 
-  productList: Product[] = [];
-  columnsToDisplay = ['nombre', 'marca', 'codigo', 'itbis', 'ubicacion'];
+  productList: MatTableDataSource<Product>;
+  displayedColumns = ['nombre', 'marca', 'codigo', 'itbis', 'ubicacion'];
   expandedElement: Product | null;
 
   constructor(private productService:ProductService) { }  
 
   ngOnInit() {
     this.getAllProducts();
+    /*
+    *   Code to remove all accents/diacritics to improve table filter.
+    *   Applying the regex to the dataSource and the filter as well.
+    */
+    this.productList.filterPredicate = (data: Product, filter: string): boolean => {
+      const dataStr = Object.keys(data).reduce((currentTerm: string, key: string) => {
+        return (currentTerm + (data as { [key: string]: any })[key] + '◬');
+      }, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+      const transformedFilter = filter.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+      return dataStr.indexOf(transformedFilter) != -1;
+    }
+  }
+  
+  applySearchFilter(filterValue:string){
+    this.productList.filter = filterValue.trim().toLowerCase();
   }
   
   getAllProducts() {
     this.productService.onGetAllProducts()
       .subscribe(resData => {
+        let productArray = []
         resData.forEach(product => {
-          this.productList.push(product)
+          productArray.push(product)
         })
+        this.productList = new MatTableDataSource(productArray)
       }
     )
     
