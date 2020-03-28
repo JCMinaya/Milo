@@ -18,7 +18,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class CustomerListComponent implements OnInit {
 
-  customerList: MatTableDataSource<Customer[]>; 
+  customerList: MatTableDataSource<Customer>; 
   displayedColumns:String[] = ['nombre', 'rnc', 'tipo', 'correo', 'telefonoFijo'];
   expandedElement: Customer | null;
   items = [];
@@ -28,7 +28,24 @@ export class CustomerListComponent implements OnInit {
   constructor(private customerService:CustomerService) { }  
 
   ngOnInit() {
-    this.getAllcustomers();
+    this.customerService.onGetAllCustomer()
+    .subscribe(resData => {
+        this.customerList = new MatTableDataSource(resData)
+
+        /*
+        *   Code to remove all accents/diacritics to improve table filter.
+        *   Applying the regex to the dataSource and the filter as well.
+        */
+      this.customerList.filterPredicate = (data: Customer, filter: string): boolean => {
+        const dataStr = Object.keys(data).reduce((currentTerm: string, key: string) => {
+          return (currentTerm + (data as { [key: string]: any })[key] + '◬');
+        }, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+        const transformedFilter = filter.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+        return dataStr.indexOf(transformedFilter) != -1;
+      }
+    })
   }
 
   proveedorFilterOnChange(){
@@ -43,19 +60,6 @@ export class CustomerListComponent implements OnInit {
   
   onChangePage(pageOfItems: Array<any>){
     this.pageOfItems = pageOfItems;
-  }
-
-  getAllcustomers() {
-    this.customerService.onGetAllCustomer()
-      .subscribe(resData => {
-        let customerArray = []
-        resData.forEach(customer => {
-          customerArray.push(customer)
-        })
-        this.customerList = new MatTableDataSource(customerArray)
-      })
-      console.log(this.customerList);
-
   }
 
 }

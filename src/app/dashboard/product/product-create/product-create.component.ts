@@ -12,7 +12,7 @@ export class ProductCreateComponent implements OnInit {
 
   product: Product;
   tipoCounter = 0;
-  productId = 0;
+  productId = 10;
   medidas = ['und', 'yds', 'caja, 1', 'paquete, 2']
 
   constructor(private productService:ProductService) {
@@ -38,7 +38,7 @@ export class ProductCreateComponent implements OnInit {
   ngOnInit() {
   }
 
-  public addProduct() : void {
+  public addTipo() : void {
  
 		this.product.tipos.push({
       tipo: this.tipoCounter++,
@@ -56,12 +56,9 @@ export class ProductCreateComponent implements OnInit {
     this.product.id = this.productId.toString();
     this.product.itbis = this.product.itbis ? "18%":"";
     this.product.maneja_inventario = this.product.maneja_inventario ? 1:0;
-    
-    this.productService.onCreateProduct(this.product)
-    .subscribe((response) => {
-      console.log(response);
-      this.productId++;
-    });
+    console.log(this.product);
+    this.productService.create(this.product);
+    this.productService.loadAll();
     
   }
 

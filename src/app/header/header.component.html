@@ -2,7 +2,7 @@
   <a class="navbar-brand col-sm-3 col-md-2 mr-0 p-0" style="background-color: ghostwhite;" href="#">
     <img id="logo" src="./assets/img/DobleK.png" class="img-fluid mx-auto d-block" alt="Logo">
   </a>
-  <h5 style="color: aliceblue;">Welcome {{user.displayName}}.</h5>
+  <h5 style="color: aliceblue;">Welcome {{(user$ | async)?.displayName}}.</h5>
   <!-- <input class="form-control mx-3" type="text" placeholder="Search" aria-label="Search"> -->
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">

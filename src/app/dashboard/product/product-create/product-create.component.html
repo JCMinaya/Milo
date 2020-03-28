@@ -84,7 +84,7 @@
                                 <span *ngIf="!isFirst" id="add-button" (click)="onRemoveTipo(index)">
                                     <i class="material-icons">remove_circle</i>
                                 </span>
-                                <span *ngIf="isFirst" id="add-button" (click)="addProduct()">
+                                <span *ngIf="isFirst" id="add-button" (click)="addTipo()">
                                     <i class="material-icons">add_circle</i>
                                 </span>
                             </div>
@@ -94,7 +94,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button href="/dashboard/products" id="submit" type="submit" class="btn btn-primary">Crear</button>
+                <button id="submit" type="submit" class="btn btn-primary">Crear</button>
             </div>
         </form>
         </div>
