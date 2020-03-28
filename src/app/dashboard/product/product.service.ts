@@ -14,7 +14,7 @@ export class ProductService {
   }     
 
   onCreateProduct(product:Product){
-    return this.http.post<Product[]>(this.apiURL + "products", product);
+    return this.http.post<Product>(this.apiURL + "products", product);
   }
 
   onGetAllProducts(){

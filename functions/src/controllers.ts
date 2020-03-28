@@ -55,3 +55,19 @@ export function multiplePosts(req:Request, res: Response, id:string, collection:
         })
     })
 }
+
+export function mergeData(req:Request, res: Response, id:string, collection:string, dataKey:string){
+    req.body.forEach(async doc => {
+        const key = doc[id].toString();
+        const docRef = db.collection(collection).doc(key);
+        if((await docRef.get()).exists){
+            docRef.update({dataKey:doc.datakey})
+            .then(data => 
+                res.status(200).json(data)
+            )
+            .catch(error => {
+                res.send( "Error merging data." + error)
+            })
+        }
+    })
+}

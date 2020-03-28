@@ -8,4 +8,10 @@ export interface Product {
     maneja_inventario: number;
     busqueda: string;
     ubicacion: string;
+    tipos:[{ 
+        unidad: string;
+        precio:number;
+        tipo: number;
+        }
+    ]
 }

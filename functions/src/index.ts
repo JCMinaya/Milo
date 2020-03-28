@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import { singlePost, getCollection, multiplePosts, getDocument } from './controllers'
+import { singlePost, getCollection, multiplePosts, getDocument, mergeData } from './controllers'
 import * as express from 'express';
 import * as bodyParser from "body-parser";
 import * as cors from "cors";
@@ -25,6 +25,10 @@ app.use('*', cors(corsOptions));
 
 app.post('/product', async (req, res) => {
     singlePost(req, res, "id", "products")
+})
+
+app.post('/productPrices', async (req, res) => {
+    mergeData(req, res, "id", "products", "tipos")
 })
 
 app.route('/products')
@@ -53,6 +57,31 @@ app.route('/customers')
 
 app.post('/customer', async (req, res) => {
     singlePost(req, res, "id", "customers")
+})
+
+app.post('/order', async (req, res) => {
+    singlePost(req, res, "documento", "orders")
+})
+
+app.route('/orders')
+    .post((req, res) => {
+        multiplePosts(req, res, "documento", "orders")
+    })
+    .get((req, res) => {
+        getCollection(res, "orders");
+    });
+
+app.route('/orders/:id')
+    .get((req, res) => {
+        getDocument(req, res, "orders")
+    })
+    .put((req, res) => {
+        res.send('Update the book')
+    });
+
+app.post('/orderDetails', async (req, res) => {
+    // mergeData(req, res, "documento", "orders", "lineas")
+    multiplePosts(req, res, "documento", "orderDetails")
 })
 
 exports.webApi = functions.https.onRequest(app);
