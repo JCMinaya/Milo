@@ -8,56 +8,95 @@
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div class="modal-body">
-            <form>
-                <div class="form-group">
-                    <label for="Nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" placeholder="Nombre del producto">
-                </div>
-                <div class="form-group">
-                    <label for="Marca">Marca</label>
-                    <input type="text" class="form-control" id="marca" placeholder="Marca del producto">
+        <form (ngSubmit)="onCreateProduct()" #productForm="ngForm">
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-6">
+                        <label for="Nombre">Nombre</label>
+                        <input type="text" class="form-control form-control-sm" id="nombre" 
+                        placeholder="Nombre del producto" required
+                        [(ngModel)]="product.nombre" name="nombre">
+                    </div>
+                    <div class="col-6">
+                        <label for="Marca">Marca</label>
+                        <input type="text" class="form-control form-control-sm" id="marca" 
+                        placeholder="Marca del producto" required
+                        [(ngModel)]="product.marca" name="marca">
+
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="Descripcion">Descripción</label>
-                    <input type="text" class="form-control" id="descripcion" placeholder="Descripción del producto">
+                    <input type="text" class="form-control form-control-sm" id="descripcion" 
+                    placeholder="Descripción del producto" required
+                    [(ngModel)]="product.descripcion" name="descripcion">
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
                             <label for="Codigo">Código</label>
-                            <input type="text" class="form-control" id="codigo" placeholder="Código del producto">
+                            <input type="text" class="form-control form-control-sm" id="codigo" 
+                            placeholder="Código del producto" required
+                            [(ngModel)]="product.codigo" name="codigo">
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="Descripcion">Precio de Compra</label>
-                            <input type="number" class="form-control" id="precioCompra" placeholder="Precio de Compra">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
                     <div class="col-sm-6">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="itbisCheck" checked>
+                            <input class="form-check-input" type="checkbox" id="itbisCheck"
+                            [(ngModel)]="product.itbis" name="itbis" checked>
                             <label class="form-check-label" for="gridCheck1">
                             ITBIS
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="manejaInvCheck" checked>
+                            <input class="form-check-input" type="checkbox" id="manejaInvCheck" 
+                            [(ngModel)]="product.maneja_inventario" name="maneja_inventario" checked>
                             <label class="form-check-label" for="gridCheck1">
                             Maneja Inventario
                             </label>
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button id="submit" (click)="onCreateProduct()" type="button" class="btn btn-primary">Guardar</button>
-        </div>
+                <hr>
+                <label for="Codigo">Tipos</label>
+                <ng-template ngFor let-tipo [ngForOf]="product.tipos" let-index="index" let-isFirst="first">
+                    <div
+                        class="tipo">
+             
+                        <div class="form-group row">
+                            <div class="col-5">
+                                <div class="form-group">
+                                    <select class="form-control form-control-sm" 
+                                    name="type_{{ tipo.tipo }}" [(ngModel)]="tipo.medida">
+                                        <option *ngFor="let medida of medidas" 
+                                            [value]="medida">{{medida}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <div class="form-group">
+                                    <input type="number" class="form-control form-control-sm"
+                                    placeholder="Precio" required
+                                    [(ngModel)]="tipo.precio" name="precio_{{tipo.tipo}}">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <span *ngIf="!isFirst" id="add-button" (click)="onRemoveTipo(index)">
+                                    <i class="material-icons">remove_circle</i>
+                                </span>
+                                <span *ngIf="isFirst" id="add-button" (click)="addProduct()">
+                                    <i class="material-icons">add_circle</i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button href="/dashboard/products" id="submit" type="submit" class="btn btn-primary">Crear</button>
+            </div>
+        </form>
         </div>
     </div>
 </div>

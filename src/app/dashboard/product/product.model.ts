@@ -9,7 +9,7 @@ export interface Product {
     busqueda: string;
     ubicacion: string;
     tipos:[{ 
-        unidad: string;
+        medida: string;
         precio:number;
         tipo: number;
         }

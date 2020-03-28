@@ -3,6 +3,7 @@ import { ProductService } from '../product.service';
 import { Product } from '../product.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatTableDataSource } from '@angular/material';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -25,20 +26,24 @@ export class ProductListComponent implements OnInit {
   constructor(private productService:ProductService) { }  
 
   ngOnInit() {
-    this.getAllProducts();
-    /*
-    *   Code to remove all accents/diacritics to improve table filter.
-    *   Applying the regex to the dataSource and the filter as well.
-    */
-    this.productList.filterPredicate = (data: Product, filter: string): boolean => {
-      const dataStr = Object.keys(data).reduce((currentTerm: string, key: string) => {
-        return (currentTerm + (data as { [key: string]: any })[key] + '◬');
-      }, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-
-      const transformedFilter = filter.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-
-      return dataStr.indexOf(transformedFilter) != -1;
-    }
+    this.productService.onGetAllProducts()
+      .subscribe((resData) => {
+        this.productList = new MatTableDataSource(resData)
+        /*
+        *   Code to remove all accents/diacritics to improve table filter.
+        *   Applying the regex to the dataSource and the filter as well.
+        */
+        this.productList.filterPredicate = (data: Product, filter: string): boolean => {
+          const dataStr = Object.keys(data).reduce((currentTerm: string, key: string) => {
+            return (currentTerm + (data as { [key: string]: any })[key] + '◬');
+          }, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    
+          const transformedFilter = filter.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    
+          return dataStr.indexOf(transformedFilter) != -1;
+        }
+      }
+    )
   }
   
   applySearchFilter(filterValue:string){
@@ -46,15 +51,9 @@ export class ProductListComponent implements OnInit {
   }
   
   getAllProducts() {
-    this.productService.onGetAllProducts()
-      .subscribe(resData => {
-        let productArray = []
-        resData.forEach(product => {
-          productArray.push(product)
-        })
-        this.productList = new MatTableDataSource(productArray)
-      }
-    )
-    
+    return this.productService.onGetAllProducts()
+      .subscribe((resData) => 
+        this.productList = new MatTableDataSource(resData)
+      )
   }
 }
