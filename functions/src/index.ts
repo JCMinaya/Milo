@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import { singlePost, getCollection, multiplePosts, getDocument, mergeData } from './controllers'
+import { singlePost, getCollection, multiplePosts, getDocument, singleDelete, mergeData } from './controllers'
 import * as express from 'express';
 import * as bodyParser from "body-parser";
 import * as cors from "cors";
@@ -44,7 +44,10 @@ app.route('/products/:id')
         getDocument(req, res, "products")
     })
     .put((req, res) => {
-        res.send('Update the book')
+        singlePost(req, res, "id", "products")
+    })
+    .delete((req, res) => {
+        singleDelete(req, res, "id", "products");
     });
 
 app.route('/customers')

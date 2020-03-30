@@ -20,7 +20,18 @@ export function singlePost(req:Request, res: Response, id:string, collection:str
     const key = req.body[id].toString();
     db.collection(collection).doc(key).set(req.body)
     .then(data => {
-        res.send(key)
+        res.send(data)
+    })
+    .catch(error => {
+        res.send( "Error adding Product." + error)
+    })
+}
+
+export function singleDelete(req:Request, res: Response, id:string, collection:string){
+    // const key = req.body[id].toString();
+    db.collection(collection).doc(req.params.id).delete()
+    .then(data => {
+        res.send(data);
     })
     .catch(error => {
         res.send( "Error adding Product." + error)

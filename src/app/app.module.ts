@@ -26,6 +26,8 @@ import { CustomerCreateComponent } from './dashboard/customer/customer-create/cu
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomerService } from './dashboard/customer/customer.service';
 import { LoggedInGuard } from 'ngx-auth-firebaseui';
+import { ConfirmDeleteDialog } from './dashboard/product/product-list/product-list.component';
+import { ProductDialog } from './dashboard/product/product-dialog.component';
 
 
 const appRoutes : Routes = [
@@ -64,7 +66,9 @@ const appRoutes : Routes = [
     ProductCreateComponent,
     CustomerListComponent,
     CustomerCreateComponent,
-    DashboardComponent
+    DashboardComponent,
+    ConfirmDeleteDialog,
+    ProductDialog
   ],
   imports: [
     BrowserModule,

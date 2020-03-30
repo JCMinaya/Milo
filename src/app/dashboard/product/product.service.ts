@@ -35,10 +35,8 @@ export class ProductService {
       .post<Product>(this.apiURL + "product", product)
       .subscribe(
         data => {
-          this.dataStore.products.push(data);
-          this._products.next(Object.assign({}, this.dataStore).products);
-          console.log(data);
-          
+          this.dataStore.products.push(product);
+          this._products.next(Object.assign({}, this.dataStore).products);          
         },
         error => console.log('Could not create product.')
       );
@@ -46,23 +44,23 @@ export class ProductService {
 
   update(product: Product) {
     this.http
-      .put<Product>(`${this.apiURL}/products/${product.id}`, product)
+      .put<Product>(`${this.apiURL}products/${product.id}`, product)
       .subscribe(
-        data => {
+        (data) => {
           this.dataStore.products.forEach((t, i) => {
-            if (t.id === data.id) {
-              this.dataStore.products[i] = data;
+            if (t.id === product.id) {
+              this.dataStore.products[i] = product;
             }
           });
 
           this._products.next(Object.assign({}, this.dataStore).products);
         },
-        error => console.log('Could not update product.')
+        error => console.log('Could not update product.' + error.data)
       );
   }
 
   remove(productId: string) {
-    this.http.delete(`${this.apiURL}/products/${productId}`).subscribe(
+    this.http.delete(`${this.apiURL}products/${productId}`).subscribe(
       response => {
         this.dataStore.products.forEach((t, i) => {
           if (t.id === productId) {

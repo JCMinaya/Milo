@@ -7,7 +7,9 @@ import {
   MatTableModule,
   MatSidenavModule,
   MatDividerModule,
-  MatSlideToggleModule
+  MatSlideToggleModule,
+  MatIconModule,
+  MatDialogModule
 } from '@angular/material';
 
 
@@ -21,7 +23,9 @@ import {
     MatTableModule,
     MatSidenavModule,
     MatDividerModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatIconModule,
+    MatDialogModule
   ],
   exports: [
     MatCheckboxModule,
@@ -31,7 +35,9 @@ import {
     MatTableModule,
     MatSidenavModule,
     MatDividerModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatIconModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule { }

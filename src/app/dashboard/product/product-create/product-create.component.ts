@@ -13,7 +13,7 @@ export class ProductCreateComponent implements OnInit {
   product: Product;
   tipoCounter = 0;
   productId = 10;
-  medidas = ['und', 'yds', 'caja, 1', 'paquete, 2']
+  medidas = ['und', 'yds', 'caja, 1', 'paquete, 2'];
 
   constructor(private productService:ProductService) {
     this.product = {

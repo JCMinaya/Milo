@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Eliminar Producto!</h1>
+<div mat-dialog-content>
+    <!-- <mat-form-field> -->
+        <label>Desea eliminar el producto: <b>{{product.nombre}} - {{product.descripcion}}</b>?</label>
+    <!-- </mat-form-field> -->
+</div>
+<hr>
+<div mat-dialog-actions>
+    <button mat-raised-button color="warn" [mat-dialog-close]="product.id" cdkFocusInitial>
+        Eliminar
+    </button>
+    <button mat-button (click)="onNoClick()">No, Gracias</button>
+</div>
