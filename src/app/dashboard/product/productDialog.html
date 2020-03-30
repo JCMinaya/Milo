@@ -33,6 +33,14 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="Ubicacion">Ubicación</label>
+                        <input type="text" class="form-control form-control-sm" id="ubicacion" 
+                        placeholder="Ubicación del producto" required
+                        [(ngModel)]="_product.ubicacion" name="ubicaion">
+                    </div>
+                </div>
+                <div class="form-check form-check-inline">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="itbisCheck"
                         [(ngModel)]="_product.itbis" name="itbis" checked>
@@ -87,8 +95,13 @@
     </div>
     <hr>
     <div mat-dialog-actions>
-        <button mat-raised-button color="primary" [mat-dialog-close]="_product" cdkFocusInitial>
+        <button *ngIf="!creatingNewProduct" mat-raised-button color="primary" 
+        [mat-dialog-close]="_product" cdkFocusInitial>
             Editar
+        </button>
+        <button *ngIf="creatingNewProduct" mat-raised-button color="primary" 
+        [mat-dialog-close]="_product" cdkFocusInitial>
+            Crear
         </button>
         <button mat-stroked-button (click)="onNoClick()" color="warn">Cancelar</button>
     </div>

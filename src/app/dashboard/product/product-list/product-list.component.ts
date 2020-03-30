@@ -49,6 +49,7 @@ export class ProductListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if (result == null) return;
       this.productService.update(result);
     })
   }
@@ -61,6 +62,7 @@ export class ProductListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      if (result == null) return;
       this.productService.remove(result);
     });
   }

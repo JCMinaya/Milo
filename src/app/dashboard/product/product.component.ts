@@ -11,6 +11,7 @@ import { ProductDialog } from './product-dialog.component';
 })
 export class ProductComponent implements OnInit {
 
+  private productId: string;
   constructor(private productService:ProductService, public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -23,6 +24,10 @@ export class ProductComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if(result == null) return;
+      // console.log(result);
+      result.id = Math.floor((Math.random() * 10000000) + 1).toString();
+      result.itbis = result.itbis ? "18%": "";
       this.productService.create(result);
     })
   }

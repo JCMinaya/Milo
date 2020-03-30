@@ -14,7 +14,6 @@ export class ProductService {
   private _products = new BehaviorSubject<Product[]>([]);
   private dataStore: { products: Product[] } = { products: [] };
   readonly products = this._products.asObservable();
-  // productList: MatTableDataSource<Product>;
 
   constructor(private http: HttpClient) { 
     this.apiURL = environment.apiURL;
@@ -32,11 +31,12 @@ export class ProductService {
 
   create(product: Product) {
     this.http
-      .post<Product>(this.apiURL + "product", product)
+      .post<Product>(`${this.apiURL}product`, product)
       .subscribe(
         data => {
+          console.log("hola");
           this.dataStore.products.push(product);
-          this._products.next(Object.assign({}, this.dataStore).products);          
+          this._products.next(Object.assign({}, this.dataStore).products);
         },
         error => console.log('Could not create product.')
       );
