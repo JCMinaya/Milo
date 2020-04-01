@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'firebase';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  user$: Observable<User>;
+  public profilePhotoUrl: String;
+  constructor(private afService:AngularFireAuth) { }
 
   ngOnInit() {
+    this.user$ = this.afService.authState.pipe();
+    this.user$.subscribe(r => this.profilePhotoUrl = r.photoURL);
   }
 
 }

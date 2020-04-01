@@ -1,1 +1,12 @@
-<p>home works!</p>
+<h2>Dashboard</h2>
+<hr>
+<mat-grid-list cols="4" rowHeight="100px">
+    <mat-grid-tile
+        *ngFor="let tile of tiles"
+        [colspan]="tile.cols"
+        [rowspan]="tile.rows">
+        <a href="{{tile.url}}">
+            <img class="backgroundPic" src="{{tile.backgroundImage}}">
+        </a>
+    </mat-grid-tile>
+</mat-grid-list>

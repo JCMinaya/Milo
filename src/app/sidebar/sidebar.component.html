@@ -1,5 +1,10 @@
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+  <div class="profile">
+    <img src="./assets/img/img_avatar.png" alt="Avatar" class="avatar">
+    <b>{{(user$ | async).displayName}}</b>
+  </div>
     <div class="sidebar-sticky">
+      <!-- <img id="profilePhoto" src="{{profilePhotoUrl}}" alt="Photo of a Shiba Inu"> -->
       <ul class="nav flex-column">
         <li class="nav-item">
           <a class="nav-link" routerLink="home" [routerLinkActive]="['active']">

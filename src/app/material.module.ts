@@ -9,7 +9,8 @@ import {
   MatDividerModule,
   MatSlideToggleModule,
   MatIconModule,
-  MatDialogModule
+  MatDialogModule,
+  MatGridListModule
 } from '@angular/material';
 
 
@@ -25,7 +26,8 @@ import {
     MatDividerModule,
     MatSlideToggleModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatGridListModule
   ],
   exports: [
     MatCheckboxModule,
@@ -37,7 +39,8 @@ import {
     MatDividerModule,
     MatSlideToggleModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatGridListModule
   ]
 })
 export class MaterialModule { }

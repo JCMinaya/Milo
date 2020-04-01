@@ -1,0 +1,7 @@
+.shadow{
+    box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
+}
+.backgroundPic{
+    width: 100%;
+    z-index: -2;
+}
