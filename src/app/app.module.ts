@@ -20,7 +20,6 @@ import { OrderComponent } from './dashboard/order/order.component';
 import { CustomerComponent } from './dashboard/customer/customer.component';
 import { ProductListComponent } from './dashboard/product/product-list/product-list.component';
 import { ProductService } from './dashboard/product/product.service';
-import { ProductCreateComponent } from './dashboard/product/product-create/product-create.component';
 import { CustomerListComponent } from './dashboard/customer/customer-list/customer-list.component';
 import { CustomerCreateComponent } from './dashboard/customer/customer-create/customer-create.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -39,14 +38,13 @@ const appRoutes : Routes = [
       {path: 'home', component: HomeComponent},
       {path: 'orders', component: OrderComponent},
       { path: 'products', component: ProductComponent,
-        children: [
-        {
-          path: '',
-          children: [
-            { path: 'create', component: ProductCreateComponent },
-            { path: 'list', component: ProductListComponent }
-          ]
-        }]
+      //   children: [
+      //   {
+      //     path: '',
+      //     children: [
+      //       { path: 'list', component: ProductListComponent }
+      //     ]
+      //   }]
       },
       {path: 'customers', component: CustomerComponent},
       { path: '**', component: HomeComponent }
@@ -63,7 +61,6 @@ const appRoutes : Routes = [
     OrderComponent,
     CustomerComponent,
     ProductListComponent,
-    ProductCreateComponent,
     CustomerListComponent,
     CustomerCreateComponent,
     DashboardComponent,

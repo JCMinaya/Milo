@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
     {text: 'Three', cols: 2, rows: 2, url: '/dashboard/orders', backgroundImage: 'assets/img/orders1.jpg'},
     {text: 'Four', cols: 2, rows: 2, url: '/dashboard/customers', backgroundImage: 'assets/img/customers.jpg'}
   ];
+  
   constructor() { }
   
   ngOnInit() {

@@ -5,3 +5,7 @@
     width: 100%;
     z-index: -2;
 }
+
+mat-grid-tile {
+    border: solid 1px #000;
+}

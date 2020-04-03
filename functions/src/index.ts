@@ -23,6 +23,10 @@ var corsOptions = {
 }
 app.use('*', cors(corsOptions));
 
+    /*
+     *   PRODUCTS 
+     */
+
 app.post('/product', async (req, res) => {
     singlePost(req, res, "id", "products")
 })
@@ -50,6 +54,10 @@ app.route('/products/:id')
         singleDelete(req, res, "id", "products");
     });
 
+    /*
+     *   CUSTOMERS 
+     */
+
 app.route('/customers')
     .post((req, res) => {
         multiplePosts(req, res, "id", "customers");
@@ -60,7 +68,22 @@ app.route('/customers')
 
 app.post('/customer', async (req, res) => {
     singlePost(req, res, "id", "customers")
-})
+    })
+
+app.route('/customers/:id')
+    .get((req, res) => {
+        getDocument(req, res, "customers")
+    })
+    .put((req, res) => {
+        singlePost(req, res, "id", "customers")
+    })
+    .delete((req, res) => {
+        singleDelete(req, res, "id", "customers");
+    });
+
+    /*
+     *   ORDERS 
+     */
 
 app.post('/order', async (req, res) => {
     singlePost(req, res, "documento", "orders")
