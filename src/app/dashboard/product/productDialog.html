@@ -1,6 +1,6 @@
 <form #productForm="ngForm">
-<h1 *ngIf="!creatingNewProduct" mat-dialog-title>Eliminar Producto!</h1>
 <h1 *ngIf="creatingNewProduct" mat-dialog-title>Crear Nuevo Producto</h1>
+<h1 *ngIf="!creatingNewProduct" mat-dialog-title>Editar Producto: {{_product.nombre}}</h1>
 <div mat-dialog-content>
         <div class="modal-body">
             <div class="form-group row">

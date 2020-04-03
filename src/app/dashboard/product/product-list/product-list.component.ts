@@ -1,10 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Product } from '../product.model';
 import { ProductDialog } from '../product-dialog.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatTableDataSource } from '@angular/material';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDeleteDialog } from '../../confirm-delete.component';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-product-list',
@@ -26,6 +28,8 @@ export class ProductListComponent implements OnInit {
 
   constructor(private productService:ProductService, public dialog: MatDialog) { }  
 
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
   ngOnInit() {
     this.productService.products.subscribe(products => {
       this.productList = new MatTableDataSource(products);
@@ -38,6 +42,7 @@ export class ProductListComponent implements OnInit {
          
          return dataStr.indexOf(transformedFilter) != -1;
        }
+       this.productList.sort = this.sort;
     })
     this.productService.loadAll();
   }
@@ -70,20 +75,4 @@ export class ProductListComponent implements OnInit {
   applySearchFilter(filterValue:string){
     this.productList.filter = filterValue.trim().toLowerCase();
   }
-}
-
-@Component({
-  selector: 'confirmDeleteDialog',
-  templateUrl: '../confirmDeleteDialog.html',
-})
-export class ConfirmDeleteDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<ConfirmDeleteDialog>,
-    @Inject(MAT_DIALOG_DATA) public product: Product) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
 }

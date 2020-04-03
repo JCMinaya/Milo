@@ -21,12 +21,12 @@ import { CustomerComponent } from './dashboard/customer/customer.component';
 import { ProductListComponent } from './dashboard/product/product-list/product-list.component';
 import { ProductService } from './dashboard/product/product.service';
 import { CustomerListComponent } from './dashboard/customer/customer-list/customer-list.component';
-import { CustomerCreateComponent } from './dashboard/customer/customer-create/customer-create.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CustomerService } from './dashboard/customer/customer.service';
 import { LoggedInGuard } from 'ngx-auth-firebaseui';
-import { ConfirmDeleteDialog } from './dashboard/product/product-list/product-list.component';
+import { ConfirmDeleteDialog } from './dashboard/confirm-delete.component';
 import { ProductDialog } from './dashboard/product/product-dialog.component';
+import { CustomerDialog } from './dashboard/customer/customer-dialog.component';
 
 
 const appRoutes : Routes = [
@@ -37,17 +37,9 @@ const appRoutes : Routes = [
     children: [
       {path: 'home', component: HomeComponent},
       {path: 'orders', component: OrderComponent},
-      { path: 'products', component: ProductComponent,
-      //   children: [
-      //   {
-      //     path: '',
-      //     children: [
-      //       { path: 'list', component: ProductListComponent }
-      //     ]
-      //   }]
-      },
+      {path: 'products', component: ProductComponent},
       {path: 'customers', component: CustomerComponent},
-      { path: '**', component: HomeComponent }
+      {path: '**', component: HomeComponent }
   ]
 }]
 
@@ -62,10 +54,10 @@ const appRoutes : Routes = [
     CustomerComponent,
     ProductListComponent,
     CustomerListComponent,
-    CustomerCreateComponent,
     DashboardComponent,
     ConfirmDeleteDialog,
-    ProductDialog
+    ProductDialog,
+    CustomerDialog
   ],
   imports: [
     BrowserModule,

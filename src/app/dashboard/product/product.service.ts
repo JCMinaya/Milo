@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Product } from './product.model';
-import { MatTableDataSource } from '@angular/material';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({

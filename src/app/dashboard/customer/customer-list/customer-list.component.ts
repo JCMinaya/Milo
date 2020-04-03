@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../customer.service';
-import { Customer } from '../customer';
+import { Customer } from '../customer.model';
 import { MatTableDataSource } from '@angular/material';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ConfirmDeleteDialog } from '../../confirm-delete.component';
+import { CustomerDialog } from '../customer-dialog.component';
 
 @Component({
   selector: 'app-customer-list',
@@ -19,23 +22,15 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class CustomerListComponent implements OnInit {
 
   customerList: MatTableDataSource<Customer>; 
-  displayedColumns:String[] = ['nombre', 'rnc', 'tipo', 'correo', 'telefonoFijo'];
+  displayedColumns:String[] = ['nombre', 'rnc', 'tipo', 'correo', 'telefonoFijo', 'Editar | Eliminar'];
   expandedElement: Customer | null;
-  items = [];
-  pageOfItems: Array<any>;
   proveedorFilterActive = false;
 
-  constructor(private customerService:CustomerService) { }  
+  constructor(private customerService:CustomerService, public dialog: MatDialog) { }  
 
   ngOnInit() {
-    this.customerService.onGetAllCustomer()
-    .subscribe(resData => {
-        this.customerList = new MatTableDataSource(resData)
-
-        /*
-        *   Code to remove all accents/diacritics to improve table filter.
-        *   Applying the regex to the dataSource and the filter as well.
-        */
+    this.customerService.customers.subscribe(customer => {
+        this.customerList = new MatTableDataSource(customer)
       this.customerList.filterPredicate = (data: Customer, filter: string): boolean => {
         const dataStr = Object.keys(data).reduce((currentTerm: string, key: string) => {
           return (currentTerm + (data as { [key: string]: any })[key] + '◬');
@@ -48,6 +43,31 @@ export class CustomerListComponent implements OnInit {
     })
   }
 
+  onEditRow(customer: Customer){
+    const dialogRef = this.dialog.open(CustomerDialog, {
+      width: '550px',
+      data: customer
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == null) return;
+      this.customerService.update(result);
+    })
+  }
+
+  onDeleteRow(customer: Customer){
+    const dialogRef = this.dialog.open(ConfirmDeleteDialog, {
+      width: '450px',
+      data: customer
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result == null) return;
+      this.customerService.remove(result);
+    });
+  }
+
   proveedorFilterOnChange(){
     this.proveedorFilterActive = !this.proveedorFilterActive;
     this.customerList.filter
@@ -56,10 +76,6 @@ export class CustomerListComponent implements OnInit {
   applySearchFilter(event:Event){
     const filterValue = (event.target as HTMLInputElement).value;
     this.customerList.filter = filterValue.trim().toLowerCase();
-  }
-  
-  onChangePage(pageOfItems: Array<any>){
-    this.pageOfItems = pageOfItems;
   }
 
 }
