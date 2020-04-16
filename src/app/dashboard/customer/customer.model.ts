@@ -3,10 +3,10 @@ export interface Customer {
     rnc: number;
     tipo: string;
     nombre: string;
-    creditoMonto: number;
-    creditoDias: number;
-    ncfTipo: number;
+    credito_monto: number;
+    credito_dias: number;
+    ncf_tipo: number;
     correo: string;
-    telefonoFijo: string;
-    telefonoMovil: string;
+    telefono_fijo: string;
+    telefono_movil: string;
 }

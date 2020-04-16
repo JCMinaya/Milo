@@ -18,7 +18,7 @@ export class CustomerService {
     this.apiURL = environment.apiURL;
   }     
   
-  loadAll(){
+  loadAll(){    
     this.http.get<Customer[]>(this.apiURL + "customers")
     .subscribe((customers) => {
       this.dataStore.customers = customers;
@@ -73,11 +73,11 @@ export class CustomerService {
     );
   }
 
-  onCreateCustomer(customer:Customer){
-    return this.http.post<Customer[]>(this.apiURL + "customers", customer);
-  }
+  // onCreateCustomer(customer:Customer){
+  //   return this.http.post<Customer[]>(this.apiURL + "customers", customer);
+  // }
 
-  onGetAllCustomer(){
-    return this.http.get<Customer[]>(this.apiURL + "customers");
-  }
+  // onGetAllCustomer(){
+  //   return this.http.get<Customer[]>(this.apiURL + "customers");
+  // }
 }

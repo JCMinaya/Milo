@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../customer.service';
 import { Customer } from '../customer.model';
 import { MatTableDataSource } from '@angular/material';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfirmDeleteDialog } from '../../confirm-delete.component';
 import { CustomerDialog } from '../customer-dialog.component';
@@ -22,7 +22,7 @@ import { CustomerDialog } from '../customer-dialog.component';
 export class CustomerListComponent implements OnInit {
 
   customerList: MatTableDataSource<Customer>; 
-  displayedColumns:String[] = ['nombre', 'rnc', 'tipo', 'correo', 'telefonoFijo', 'Editar | Eliminar'];
+  displayedColumns:String[] = ['nombre', 'rnc', 'tipo', 'correo', 'Editar | Eliminar'];
   expandedElement: Customer | null;
   proveedorFilterActive = false;
 
@@ -41,6 +41,7 @@ export class CustomerListComponent implements OnInit {
         return dataStr.indexOf(transformedFilter) != -1;
       }
     })
+    this.customerService.loadAll();
   }
 
   onEditRow(customer: Customer){

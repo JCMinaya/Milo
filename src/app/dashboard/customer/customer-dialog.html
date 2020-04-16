@@ -2,6 +2,12 @@
 <h1 mat-dialog-title>Crear Nuevo Cliente</h1>
 <div mat-dialog-content>
         <div class="modal-body">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control form-control-sm" id="nombre" 
+                placeholder="Nombre del cliente" required
+                [(ngModel)]="_customer.nombre" name="nombre">
+            </div>
             <div class="form-group row">
                 <div class="col-6">
                     <label for="RNC">RNC</label>
@@ -10,17 +16,25 @@
                     [(ngModel)]="_customer.rnc" name="rnc">
                 </div>
                 <div class="col-6">
-                    <label for="Nombre">Nombre</label>
-                    <input type="text" class="form-control form-control-sm" id="nombre" 
-                    placeholder="Nombre del cliente" required
-                    [(ngModel)]="_customer.nombre" name="nombre">
+                    <label for="Correo">Correo del cliente</label>
+                    <input type="text" class="form-control form-control-sm" id="correo" 
+                    placeholder="Email del cliente" required
+                    [(ngModel)]="_customer.correo" name="correo">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="correo">Correo del cliente</label>
-                <input type="text" class="form-control form-control-sm" id="correo" 
-                placeholder="Email del cliente" required
-                [(ngModel)]="_customer.correo" name="correo">
+            <div class="form-group row">
+                <div class="col-6">
+                    <label for="telefonoFijo">Teléfono Fijo</label>
+                    <input type="text" class="form-control form-control-sm" id="telFijo" 
+                    placeholder="Teléfono Fijo" 
+                    [(ngModel)]="_customer.telefono_fijo" name="telFijo">
+                </div>
+                <div class="col-6">
+                    <label for="telefonoMovil">Teléfono Móvil</label>
+                    <input type="text" class="form-control form-control-sm" id="telMovil" 
+                    placeholder="Teléfono Movil" 
+                    [(ngModel)]="_customer.telefono_movil" name="telMovil">
+                </div>
             </div>
             <div class="row">
                 <div class="col-6">
@@ -35,7 +49,7 @@
                     <div class="form-group">
                         <label for="Ubicacion">Tipo NCF</label>
                         <select class="form-control form-control-sm" 
-                            name="tipo" [(ngModel)]="_customer.ncfTipo">
+                            name="tipo" [(ngModel)]="_customer.ncf_tipo">
                                 <option *ngFor="let ncf of ncfTipos" 
                                     value="{{ncf.id}}">{{ncf.descripcion}}</option>
                             </select>

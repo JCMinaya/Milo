@@ -35,8 +35,10 @@
           <div class="example-element-weight"> {{element.tipo}} </div>
         </div>
         <div class="example-element-description">
-          {{element.descripcion}}
-          <span class="example-element-description-attribution"> -- Cliente </span>
+          <b>{{element.nombre}}</b>
+          <li>Teléfono Fijo: <b>{{element.telefono_fijo}}</b> - Teléfono Móvil: <b>{{element.telefono_movil}}</b></li>
+          <li>Días de Crédito: <b>{{element.creditos_dias}}</b> - Monto Crédito: <b>{{element.credito_monto}}</b></li>
+          <span class="example-element-description-attribution"> -- {{element.tipo}} </span>
         </div>
       </div>
     </td>
