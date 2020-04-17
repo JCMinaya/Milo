@@ -4,7 +4,7 @@ export interface Order {
     estado: string,
     entidad: number,
     descripcion: string,
-    fecha: Date,
+    fecha: string,
     ncf_rnc: number,
     ncf_tipo: number,
     ncf_secuencia: number,
@@ -17,7 +17,7 @@ export interface Order {
     descuento_porcentaje: string,
     descuento_plano: number,
     termino: string,
-    vencimiento: Date,
+    vencimiento: string,
     proposito: string,
     otros_campos: object
 }

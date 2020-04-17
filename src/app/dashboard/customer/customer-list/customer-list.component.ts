@@ -30,7 +30,7 @@ export class CustomerListComponent implements OnInit {
 
   ngOnInit() {
     this.customerService.customers.subscribe(customer => {
-        this.customerList = new MatTableDataSource(customer)
+      this.customerList = new MatTableDataSource(customer)
       this.customerList.filterPredicate = (data: Customer, filter: string): boolean => {
         const dataStr = Object.keys(data).reduce((currentTerm: string, key: string) => {
           return (currentTerm + (data as { [key: string]: any })[key] + '◬');
@@ -39,7 +39,7 @@ export class CustomerListComponent implements OnInit {
         const transformedFilter = filter.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
         return dataStr.indexOf(transformedFilter) != -1;
-      }
+      } 
     })
     this.customerService.loadAll();
   }

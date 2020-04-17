@@ -1,1 +1,95 @@
-<p>order works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-8 form-inline">
+            <h2> 
+                <i class="material-icons">description</i> 
+            </h2>
+            <h3> - Ordenes</h3>
+        </div>
+        <div class="col-2">
+          <button mat-raised-button (click)="onCreateOrder()" class="float-right" color="primary">
+              Crear Orden
+          </button>
+        </div>
+        <div class="col-2">
+            <button *ngIf="!showingOrdersList" mat-raised-button (click)="toggleOrderList()" class="float-right" color="primary">
+                Ver Ordenes
+            </button>
+            <button *ngIf="showingOrdersList" mat-raised-button (click)="toggleOrderList()" class="float-right" color="primary">
+                Gráficos
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div *ngIf="!showingOrdersList" class="row">
+        <div class="col-5">
+            <mat-card class="example-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>Métodos de pago</mat-card-title>
+                </mat-card-header>
+                <hr style="margin: 0">
+                <canvas baseChart 
+                  [data]="pieChartData" 
+                  [labels]="pieChartLabels" 
+                  [chartType]="pieChartType"
+                  [options]="pieChartOptions"
+                  [plugins]="pieChartPlugins"
+                  [legend]="pieChartLegend">
+                </canvas>
+                <mat-card-content>
+                  <p>
+                    Diagrama circular mostrando los métodos de pagos de todas las ordenes.
+                  </p>
+                </mat-card-content>
+              </mat-card>
+              <br>
+              <mat-card class="example-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>Término (Crédito o Contado)</mat-card-title>
+                </mat-card-header>
+                <hr style="margin: 0">
+                <canvas baseChart 
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [plugins]="barChartPlugins"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType">
+                </canvas>
+                <mat-card-content>
+                  <p>
+                    Diagrama de barra mostrando la cantidad de ordenes a 
+                    crédito o contado por mes.
+                  </p>
+                </mat-card-content>
+              </mat-card>
+              
+        </div>
+          <div class="col-7">
+            <mat-card class="example-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>Órdenes por mes</mat-card-title>
+                </mat-card-header>
+                <hr style="margin: 0">
+                <canvas baseChart width="400" height="400"
+                    [datasets]="lineChartData"
+                    [labels]="lineChartLabels"
+                    [options]="lineChartOptions"
+                    [colors]="lineChartColors"
+                    [legend]="lineChartLegend"
+                    [chartType]="lineChartType"
+                    [plugins]="lineChartPlugins">
+                </canvas>
+                <mat-card-content>
+                  <p>
+                    Diagrama linear mostrando la cantidad de ordenes por mes.
+                  </p>
+                </mat-card-content>
+              </mat-card>
+          </div>
+    </div>
+</div>
+<app-order-list *ngIf="showingOrdersList"></app-order-list>

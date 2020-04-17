@@ -10,7 +10,8 @@ import {
   MatSlideToggleModule,
   MatIconModule,
   MatDialogModule,
-  MatGridListModule
+  MatGridListModule,
+  MatCardModule
 } from '@angular/material';
 
 
@@ -27,7 +28,8 @@ import {
     MatSlideToggleModule,
     MatIconModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    MatCardModule
   ],
   exports: [
     MatCheckboxModule,
@@ -40,7 +42,8 @@ import {
     MatSlideToggleModule,
     MatIconModule,
     MatDialogModule,
-    MatGridListModule
+    MatGridListModule,
+    MatCardModule
   ]
 })
 export class MaterialModule { }

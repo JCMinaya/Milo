@@ -1,0 +1,20 @@
+<form #orderForm="ngForm">
+    <h1 mat-dialog-title>Crear Nuevo Cliente</h1>
+    <div mat-dialog-content>
+            <div class="modal-body">
+                
+            </div>
+        </div>
+        <hr>
+        <div mat-dialog-actions>
+            <button *ngIf="!creatingNewOrder" mat-raised-button color="primary" 
+            [mat-dialog-close]="_order" cdkFocusInitial>
+                Editar
+            </button>
+            <button *ngIf="creatingNewOrder" mat-raised-button color="primary" 
+            [mat-dialog-close]="_order" cdkFocusInitial>
+                Crear
+            </button>
+            <button mat-stroked-button (click)="onNoClick()" color="warn">Cancelar</button>
+        </div>
+    </form>

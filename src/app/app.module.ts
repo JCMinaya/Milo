@@ -9,24 +9,28 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { environment } from '../environments/environment';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductComponent } from './dashboard/product/product.component';
 import { HomeComponent } from './dashboard/home/home.component';
 import { OrderComponent } from './dashboard/order/order.component';
 import { CustomerComponent } from './dashboard/customer/customer.component';
 import { ProductListComponent } from './dashboard/product/product-list/product-list.component';
-import { ProductService } from './dashboard/product/product.service';
 import { CustomerListComponent } from './dashboard/customer/customer-list/customer-list.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { OrderListComponent } from './dashboard/order/order-list/order-list.component';
+import { ProductService } from './dashboard/product/product.service';
 import { CustomerService } from './dashboard/customer/customer.service';
-import { LoggedInGuard } from 'ngx-auth-firebaseui';
+import { OrderService } from './dashboard/order/order.service';
 import { ConfirmDeleteDialog } from './dashboard/confirm-delete.component';
 import { ProductDialog } from './dashboard/product/product-dialog.component';
 import { CustomerDialog } from './dashboard/customer/customer-dialog.component';
+import { OrderDialog } from './dashboard/order/order-dialog.component';
+import { LoggedInGuard } from 'ngx-auth-firebaseui';
 
 
 const appRoutes : Routes = [
@@ -54,10 +58,12 @@ const appRoutes : Routes = [
     CustomerComponent,
     ProductListComponent,
     CustomerListComponent,
+    OrderListComponent,
     DashboardComponent,
     ConfirmDeleteDialog,
     ProductDialog,
-    CustomerDialog
+    CustomerDialog,
+    OrderDialog
   ],
   imports: [
     BrowserModule,
@@ -69,9 +75,10 @@ const appRoutes : Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
-    AuthModule
+    AuthModule,
+    ChartsModule
   ],
-  providers: [ProductService, CustomerService],
+  providers: [ProductService, CustomerService, OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

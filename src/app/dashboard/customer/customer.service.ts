@@ -72,12 +72,4 @@ export class CustomerService {
       error => console.log('Could not delete customer.')
     );
   }
-
-  // onCreateCustomer(customer:Customer){
-  //   return this.http.post<Customer[]>(this.apiURL + "customers", customer);
-  // }
-
-  // onGetAllCustomer(){
-  //   return this.http.get<Customer[]>(this.apiURL + "customers");
-  // }
 }
