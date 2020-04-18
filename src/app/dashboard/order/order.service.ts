@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Order } from './order';
+import { Order, OrderDetails } from './order';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,10 @@ export class OrderService {
     },
       error => console.log("Could not load Orders."+ error)
     );
+  }
+
+  getOrderDetails(document: String): Observable<OrderDetails>{    
+    return this.http.get<OrderDetails>(this.apiURL + "orderDetails/" + document);
   }
 
   create(order: Order) {

@@ -21,3 +21,20 @@ export interface Order {
     proposito: string,
     otros_campos: object
 }
+
+export interface OrderDetails{
+    documento: string,
+    lineas: [{
+        fecha: string;
+        maneja_inventario: number;
+        producto: string;
+        descripcion: string;
+        cantidad: any;
+        unidad: string;
+        unidad_inventario: number;
+        precio: number;
+        monto_neto: number;
+        itbis: number;
+        monto_bruto: number;
+    }]
+}

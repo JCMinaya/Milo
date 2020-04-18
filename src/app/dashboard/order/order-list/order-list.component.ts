@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../order.service';
-import { Order } from '../order';
+import { Order, OrderDetails } from '../order';
 import { MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -25,8 +25,9 @@ export class OrderListComponent implements OnInit {
                                 'descuento', 'itbis', 'total', 'Editar | Eliminar'];
   expandedElement: Order | null;
   proveedorFilterActive = false;
+  orderDetail: OrderDetails;
 
-  constructor(private orderService:OrderService, public dialog: MatDialog) { }
+  constructor(public orderService:OrderService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.orderService.orders.subscribe(order => {
@@ -42,6 +43,14 @@ export class OrderListComponent implements OnInit {
       }
     })
     this.orderService.loadAll();
+  }
+
+  getOrderDetails(doc: String){
+    console.log(doc);
+    this.orderDetail = null;
+    this.orderService.getOrderDetails(doc).subscribe((orderDetail) => {
+      this.orderDetail = orderDetail;
+    })
   }
 
   onEditRow(order: Order){

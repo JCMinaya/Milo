@@ -105,6 +105,14 @@ app.route('/orders/:id')
         res.send('Update the book')
     });
 
+app.route('/orderDetails/:id')
+    .get((req, res) => {
+        getDocument(req, res, "orderDetails")
+    })
+    .put((req, res) => {
+        res.send('Update the order')
+    });
+
 app.post('/orderDetails', async (req, res) => {
     // mergeData(req, res, "documento", "orders", "lineas")
     multiplePosts(req, res, "documento", "orderDetails")

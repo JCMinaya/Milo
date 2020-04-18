@@ -9,7 +9,10 @@ export function getDocument(req: Request, res: Response, collection:string){
         if (doc.exists) {
             return res.status(200).json(doc.data());
         } else {
-            return res.status(400).json({"message":"Product ID not found."});
+            return res.status(400).json(
+                {"message": "ID not found.",
+                    "Id": req.params.id
+                });
         }
     }).catch((error) => {
         return res.status(400).json({"message":"Unable to connect to Firestore."});

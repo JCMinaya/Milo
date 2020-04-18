@@ -31,7 +31,15 @@
             <div class="example-element-name"> {{element.descripcion}} </div>
           </div>
           <div class="example-element-description">
-            <b>{{element.descripcion}}</b>
+            <b *ngIf="element == expandedElement">
+              {{ orderDetail.documento }}
+              <ul>
+                <li *ngFor="let linea of orderDetail.lineas">
+                  {{ linea.producto }} - {{ linea.cantidad }} - {{ linea.fecha }} -
+                  {{ linea.precio }} - {{ linea.itbis }} - {{ linea.monto_bruto }}
+                </li>
+              </ul>
+            </b>
             <span class="example-element-description-attribution"> -- {{element.tipo}} </span>
           </div>
         </div>
@@ -42,8 +50,9 @@
     <tr mat-row *matRowDef="let element; columns: displayedColumns;"
         class="example-element-row"
         [class.example-expanded-row]="expandedElement === element"
-        (click)="expandedElement = expandedElement === element ? null : element">
+        (click)="getOrderDetails(element.documento); expandedElement = expandedElement === element ? null : element">
     </tr>
-    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row">
+    </tr>
   </table>
   
