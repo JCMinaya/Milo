@@ -40,6 +40,7 @@ table {
   
   .example-element-description {
     padding: 16px;
+    width: 100%;
   }
   
   .example-element-description-attribution {
@@ -49,4 +50,8 @@ table {
   .mat-form-field {
     font-size: 14px;
     width: 100%;
+  }
+
+  #secondTable {
+    background-color: papayawhip;
   }

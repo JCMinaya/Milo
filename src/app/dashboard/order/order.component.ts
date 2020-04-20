@@ -4,6 +4,7 @@ import { SingleDataSet, Color, Label, monkeyPatchChartJsLegend, monkeyPatchChart
 import { OrderService } from './order.service';
 import { OrderDialog } from './order-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -54,12 +55,21 @@ export class OrderComponent implements OnInit {
   public lineChartType = 'line';
   public lineChartPlugins = [];
 
-  constructor(private orderService:OrderService, public dialog: MatDialog) {
+  constructor(private orderService:OrderService, 
+              public dialog: MatDialog, 
+              private router:ActivatedRoute) {
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
   }
 
   ngOnInit() {
+    this.router.params.subscribe((params) => {
+      if(params['page'] == "list"){
+        this.showingOrdersList = true;
+      }else{
+        this.showingOrdersList = false;
+      }
+    })    
   }
 
   toggleOrderList() {

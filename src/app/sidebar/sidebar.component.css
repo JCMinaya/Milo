@@ -80,3 +80,7 @@
     margin: auto;
     padding-top: 10px;
   }
+
+  .child{
+    padding-left: 3em!important;
+  }

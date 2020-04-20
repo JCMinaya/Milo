@@ -41,6 +41,7 @@ const appRoutes : Routes = [
     children: [
       {path: 'home', component: HomeComponent},
       {path: 'orders', component: OrderComponent},
+      {path: 'orders/:page', component: OrderComponent},
       {path: 'products', component: ProductComponent},
       {path: 'customers', component: CustomerComponent},
       {path: '**', component: HomeComponent }

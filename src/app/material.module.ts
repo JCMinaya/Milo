@@ -11,7 +11,8 @@ import {
   MatIconModule,
   MatDialogModule,
   MatGridListModule,
-  MatCardModule
+  MatCardModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 
@@ -29,7 +30,8 @@ import {
     MatIconModule,
     MatDialogModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatCheckboxModule,
@@ -43,7 +45,8 @@ import {
     MatIconModule,
     MatDialogModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModule { }

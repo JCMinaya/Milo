@@ -8,7 +8,7 @@
     <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
       <th mat-header-cell *matHeaderCellDef> {{column}} </th>
       <td mat-cell *matCellDef="let element"> 
-        {{element[column]}} 
+        {{ needsCurrencyFormat(column, element[column]) }} 
         <div *ngIf="column == 'Editar | Eliminar'">
           <button (click)="onEditRow(element)" mat-icon-button color="primary">
             <mat-icon>edit</mat-icon>
@@ -31,15 +31,18 @@
             <div class="example-element-name"> {{element.descripcion}} </div>
           </div>
           <div class="example-element-description">
-            <b *ngIf="element == expandedElement">
-              {{ orderDetail.documento }}
-              <ul>
-                <li *ngFor="let linea of orderDetail.lineas">
-                  {{ linea.producto }} - {{ linea.cantidad }} - {{ linea.fecha }} -
-                  {{ linea.precio }} - {{ linea.itbis }} - {{ linea.monto_bruto }}
-                </li>
-              </ul>
-            </b>
+              <!-- Table with the order details -->
+              <table id="secondTable" mat-table [dataSource]="orderLines" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="{{columnOrderLines}}" *ngFor="let columnOrderLines of displayedColumnsOrderLines">
+                  <th mat-header-cell *matHeaderCellDef> {{columnOrderLines}} </th>
+                  <td mat-cell *matCellDef="let item"> {{ needsCurrencyFormat(columnOrderLines, item[columnOrderLines]) }} </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsOrderLines"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsOrderLines;"></tr>
+              </table>
+              <h3 *ngIf="orderLines == null">Loading ...</h3>
             <span class="example-element-description-attribution"> -- {{element.tipo}} </span>
           </div>
         </div>

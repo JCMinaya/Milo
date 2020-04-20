@@ -1,6 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SidebarComponent } from './sidebar.component';
+import { AngularFireModule } from '@angular/fire';
+import { of } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { environment } from '../../environments/environment';
+
+let AngularFireMocks = {
+  authState: of({ uid: 'ABC123' }),
+  displayName: "John Doe"
+};
 
 describe('SidebarComponent', () => {
   let component: SidebarComponent;
@@ -8,7 +17,11 @@ describe('SidebarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SidebarComponent ]
+      declarations: [ SidebarComponent ],
+      imports: [AngularFireModule.initializeApp(environment.firebase)],
+      providers: [ 
+        { provide: AngularFireAuth, useValue: AngularFireMocks } 
+      ]
     })
     .compileComponents();
   }));
@@ -22,4 +35,5 @@ describe('SidebarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

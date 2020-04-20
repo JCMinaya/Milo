@@ -24,17 +24,19 @@ export interface Order {
 
 export interface OrderDetails{
     documento: string,
-    lineas: [{
-        fecha: string;
-        maneja_inventario: number;
-        producto: string;
-        descripcion: string;
-        cantidad: any;
-        unidad: string;
-        unidad_inventario: number;
-        precio: number;
-        monto_neto: number;
-        itbis: number;
-        monto_bruto: number;
-    }]
+    lineas: OrderLines[]
+}
+
+export interface OrderLines{
+    fecha: string;
+    maneja_inventario: number;
+    producto: string;
+    descripcion: string;
+    cantidad: any;
+    unidad: string;
+    unidad_inventario: number;
+    precio: number;
+    monto_neto: number;
+    itbis: number;
+    monto_bruto: number;
 }

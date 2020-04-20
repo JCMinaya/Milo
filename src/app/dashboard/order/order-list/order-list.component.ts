@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../order.service';
-import { Order, OrderDetails } from '../order';
+import { Order, OrderDetails, OrderLines } from '../order';
 import { MatTableDataSource } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDeleteDialog } from '../../confirm-delete.component';
 
 @Component({
@@ -21,11 +21,13 @@ import { ConfirmDeleteDialog } from '../../confirm-delete.component';
 export class OrderListComponent implements OnInit {
 
   orderList: MatTableDataSource<Order>; 
+  orderLines: MatTableDataSource<OrderLines>; 
   displayedColumns:String[] = ['documento', 'fecha', 'estado', 'subtotal',
                                 'descuento', 'itbis', 'total', 'Editar | Eliminar'];
+  displayedColumnsOrderLines:String[] = ['producto', 'cantidad', 'unidad', 'precio',
+                                         'itbis', 'monto_bruto'];
   expandedElement: Order | null;
   proveedorFilterActive = false;
-  orderDetail: OrderDetails;
 
   constructor(public orderService:OrderService, public dialog: MatDialog) { }
 
@@ -46,11 +48,32 @@ export class OrderListComponent implements OnInit {
   }
 
   getOrderDetails(doc: String){
-    console.log(doc);
-    this.orderDetail = null;
+    this.orderLines = null;
     this.orderService.getOrderDetails(doc).subscribe((orderDetail) => {
-      this.orderDetail = orderDetail;
+      this.orderLines = new MatTableDataSource(orderDetail.lineas);
     })
+  } 
+
+  needsCurrencyFormat(column, value){
+    if( column == "subtotal" ||
+        column == "itbis" ||
+        column == "total" ||
+        column == "precio" ||
+        column == "monto_bruto"){
+          return this.currencyFormatter(value);
+        }
+    if( column == "cantidad") return Math.abs(parseInt(value));
+
+    return value;
+  }
+
+  currencyFormatter(number){
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+    
+    return formatter.format(number);
   }
 
   onEditRow(order: Order){
