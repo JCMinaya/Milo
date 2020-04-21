@@ -1,8 +1,29 @@
 <form #orderForm="ngForm">
-    <h1 mat-dialog-title>Crear Nuevo Cliente</h1>
+    <h1 mat-dialog-title>Crear Nuevo Pedido</h1>
     <div mat-dialog-content>
             <div class="modal-body">
-                
+                <ng-template ngFor let-lineas [ngForOf]="_orderDetails.lineas" let-index="index" let-isFirst="first">
+                    <div class="form-group">
+                        <label for="producto">Nombre</label>
+                        <input type="text" class="form-control form-control-sm" id="producto" 
+                        placeholder="Nombre del cliente" required
+                        [(ngModel)]="lineas.producto" name="producto">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <label for="Cantidad">Cantidad</label>
+                            <input type="number" class="form-control form-control-sm" id="cantidad" 
+                            placeholder="Cantidad" required
+                            [(ngModel)]="lineas.cantidad" name="cantidad">
+                        </div>
+                        <div class="col-6">
+                            <label for="Unidad">Unidad</label>
+                            <input type="text" class="form-control form-control-sm" id="unidad" 
+                            placeholder="Unidad" required
+                            [(ngModel)]="lineas.unidad" name="unidad">
+                        </div>
+                    </div>
+                </ng-template>
             </div>
         </div>
         <hr>

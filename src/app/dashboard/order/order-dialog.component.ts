@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Order } from './order';
+import { Order, OrderDetails } from './order';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -9,16 +9,18 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   export class OrderDialog implements OnInit {
   
     _order: Order;
+    _orderDetails: OrderDetails;
     creatingNewOrder: boolean = false;
     constructor(
       public dialogRef: MatDialogRef<OrderDialog>,
-      @Inject(MAT_DIALOG_DATA) public order: Order) {}
+      @Inject(MAT_DIALOG_DATA) public order: Order,
+      @Inject(MAT_DIALOG_DATA) public orderDetails: OrderDetails) {}
   
     ngOnInit(){
         if(this.order == null) this.creatingNewOrder = true;
 
         if(this.creatingNewOrder){
-            this._order = {
+            this._order = { 
                 documento: "",
                 tipo: 1,
                 estado: "",
@@ -40,9 +42,28 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
                 vencimiento: "",
                 proposito: "",
                 otros_campos: []
+            };
+            this._orderDetails = {
+                documento: "",
+                lineas: [
+                    {
+                        fecha: new Date().toString(),
+                        maneja_inventario: 0,
+                        producto: "",
+                        descripcion: "",
+                        cantidad: 0,
+                        unidad: "und",
+                        unidad_inventario: 0,
+                        precio: 0,
+                        monto_neto: 0,
+                        itbis: 0,
+                        monto_bruto: 0,
+                    }
+                ]
             }
         }else{
             this._order = Object.assign({}, this.order);
+            this._orderDetails = Object.assign({}, this.orderDetails);
         }
     }
   
