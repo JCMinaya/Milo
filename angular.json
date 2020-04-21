@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "milo"
+  "defaultProject": "milo",
+  "cli": {
+    "analytics": "4dab3beb-a3e1-4d1d-b3d0-665bb275f9d0"
+  }
 }

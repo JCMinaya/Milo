@@ -22,7 +22,7 @@ import { CustomerDialog } from '../customer-dialog.component';
 export class CustomerListComponent implements OnInit {
 
   customerList: MatTableDataSource<Customer>; 
-  displayedColumns:String[] = ['nombre', 'description', 'rnc', 'tipo', 'correo', 'Editar | Eliminar'];
+  displayedColumns:String[] = ['nombre', 'rnc', 'tipo', 'correo', 'Editar | Eliminar'];
   expandedElement: Customer | null;
   proveedorFilterActive = false;
 
