@@ -44,7 +44,7 @@ export class ProductListComponent implements OnInit {
        }
        this.productList.sort = this.sort;
     })
-    this.productService.loadAll();
+    this.productService.loadAll();    
   }
 
   onEditRow(product: Product){
