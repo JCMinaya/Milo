@@ -33,7 +33,6 @@ export class ProductService {
       .post<Product>(`${this.apiURL}product`, product)
       .subscribe(
         data => {
-          console.log("hola");
           this.dataStore.products.push(product);
           this._products.next(Object.assign({}, this.dataStore).products);
         },

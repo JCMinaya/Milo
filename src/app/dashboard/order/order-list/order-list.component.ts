@@ -23,7 +23,7 @@ export class OrderListComponent implements OnInit {
   orderList: MatTableDataSource<Order>; 
   orderLines: MatTableDataSource<OrderLines>; 
   displayedColumns:String[] = ['documento', 'fecha', 'estado', 'subtotal',
-                                'descuento', 'itbis', 'total', 'Editar | Eliminar'];
+                                'descuento', 'itbis', 'total'];
   displayedColumnsOrderLines:String[] = ['producto', 'cantidad', 'unidad', 'precio',
                                          'itbis', 'monto_bruto'];
   expandedElement: Order | null;

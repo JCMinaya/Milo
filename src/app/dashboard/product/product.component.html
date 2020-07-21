@@ -8,11 +8,11 @@
             <h3> - Productos</h3>
         </div>
         <div class="col-2">
-            <button mat-raised-button (click)="onCreateProduct()" class="float-right" color="primary">
+            <button mat-raised-button (click)="childcomp.onCreateProduct()" class="float-right" color="primary">
                 Crear Producto
             </button>
         </div>
     </div>
 </div>
 <mat-divider></mat-divider>
-<app-product-list></app-product-list>
+<app-product-list #childcomp></app-product-list>

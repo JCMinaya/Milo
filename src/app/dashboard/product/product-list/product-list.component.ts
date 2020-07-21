@@ -47,6 +47,20 @@ export class ProductListComponent implements OnInit {
     this.productService.loadAll();    
   }
 
+  onCreateProduct(){
+    const dialogRef = this.dialog.open(ProductDialog, {
+      width: '550px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == null) return;
+      // console.log(result);
+      result.id = Math.floor((Math.random() * 10000000) + 1).toString();
+      result.itbis = result.itbis ? "18%": "";
+      this.productService.create(result);
+    })
+  }
+
   onEditRow(product: Product){
     const dialogRef = this.dialog.open(ProductDialog, {
       width: '550px',

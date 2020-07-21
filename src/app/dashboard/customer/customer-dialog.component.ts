@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Customer } from './customer.model';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'edit-customer-dialog',
@@ -22,11 +23,23 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
                 {id: 91, descripcion: "Entrada"},
             ]
     creatingNewCustomer: boolean = false;
+    customerForm: FormGroup;
+
     constructor(
       public dialogRef: MatDialogRef<CustomerDialog>,
+      private fb: FormBuilder,
       @Inject(MAT_DIALOG_DATA) public customer: Customer) {}
   
     ngOnInit(){
+        this.customerForm = this.fb.group({
+          nombre: ['', [Validators.required]],
+          correo: ['', [Validators.required, Validators.pattern("[^ @]*@[^ @]*")]],
+          rnc: ['', [Validators.required, Validators.minLength(8)]],
+          telFijo: ['', Validators.minLength(10)],
+          telMovil: ['', Validators.minLength(10)],
+          tipo: [this.tipos[0], [Validators.required]],
+          tipoNFC: [this.ncfTipos[0], [Validators.required]],
+        })
         if(this.customer == null) this.creatingNewCustomer = true;
 
         if(this.creatingNewCustomer){
@@ -36,7 +49,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
             }
         }else{
             console.log(this.customer);
-            
             this._customer = Object.assign({}, this.customer);
         }
     }

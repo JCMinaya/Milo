@@ -1,4 +1,4 @@
-<form #customerForm="ngForm">
+<form [formGroup]="customerForm">
 <h1 mat-dialog-title>Crear Nuevo Cliente</h1>
 <div mat-dialog-content>
         <div class="modal-body">
@@ -6,20 +6,20 @@
                 <label for="nombre">Nombre</label>
                 <input type="text" class="form-control form-control-sm" id="nombre" 
                 placeholder="Nombre del cliente" required
-                [(ngModel)]="_customer.nombre" name="nombre">
+                [(ngModel)]="_customer.nombre" formControlName="nombre">
             </div>
             <div class="form-group row">
                 <div class="col-6">
                     <label for="RNC">RNC</label>
                     <input type="number" class="form-control form-control-sm" id="rnc" 
                     placeholder="RNC" required
-                    [(ngModel)]="_customer.rnc" name="rnc">
+                    [(ngModel)]="_customer.rnc" formControlName="rnc">
                 </div>
                 <div class="col-6">
                     <label for="Correo">Correo del cliente</label>
                     <input type="text" class="form-control form-control-sm" id="correo" 
                     placeholder="Email del cliente" required
-                    [(ngModel)]="_customer.correo" name="correo">
+                    [(ngModel)]="_customer.correo" formControlName="correo">
                 </div>
             </div>
             <div class="form-group row">
@@ -27,20 +27,20 @@
                     <label for="telefonoFijo">Teléfono Fijo</label>
                     <input type="text" class="form-control form-control-sm" id="telFijo" 
                     placeholder="Teléfono Fijo" 
-                    [(ngModel)]="_customer.telefono_fijo" name="telFijo">
+                    [(ngModel)]="_customer.telefono_fijo" formControlName="telFijo">
                 </div>
                 <div class="col-6">
                     <label for="telefonoMovil">Teléfono Móvil</label>
                     <input type="text" class="form-control form-control-sm" id="telMovil" 
                     placeholder="Teléfono Movil" 
-                    [(ngModel)]="_customer.telefono_movil" name="telMovil">
+                    [(ngModel)]="_customer.telefono_movil" formControlName="telMovil">
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
-                <label for="correo">Tipo de Cliente</label>
-                <select class="form-control form-control-sm" 
-                    name="tipo" [(ngModel)]="_customer.tipo">
+                <label for="correo">Tipo de Cliente</label> 
+                <select class="form-control form-control-sm" id=""
+                    formControlName="tipo" [(ngModel)]="_customer.tipo">
                         <option *ngFor="let tipo of tipos" 
                             value="{{tipo}}">{{tipo}}</option>
                     </select>
@@ -49,7 +49,7 @@
                     <div class="form-group">
                         <label for="Ubicacion">Tipo NCF</label>
                         <select class="form-control form-control-sm" 
-                            name="tipo" [(ngModel)]="_customer.ncf_tipo">
+                            formControlName="tipoNFC" [(ngModel)]="_customer.ncf_tipo">
                                 <option *ngFor="let ncf of ncfTipos" 
                                     value="{{ncf.id}}">{{ncf.descripcion}}</option>
                             </select>

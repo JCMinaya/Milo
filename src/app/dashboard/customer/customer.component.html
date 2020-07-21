@@ -8,8 +8,9 @@
             <h3> Clientes | Proveedores </h3>
         </div>
         <div class="col-2">
-            <button mat-raised-button class="float-right" color="primary" data-toggle="modal" data-target="#customerCreate">
-                Crear Entidad</button>
+            <button mat-raised-button (click)="onCreateCustomer()" class="float-right" color="primary">
+                Crear Entidad
+            </button>
         </div>
     </div>
 </div>

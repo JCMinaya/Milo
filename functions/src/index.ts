@@ -103,6 +103,9 @@ app.route('/orders/:id')
     })
     .put((req, res) => {
         res.send('Update the book')
+    })
+    .delete((req, res) => {
+        singleDelete(req, res, "documento", "orders");
     });
 
 app.route('/orderDetails/:id')

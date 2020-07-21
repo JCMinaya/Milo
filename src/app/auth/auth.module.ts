@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { NgxAuthFirebaseUIModule, LoggedInGuard } from 'ngx-auth-firebaseui';
 import { MaterialModule } from '../material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
@@ -29,6 +30,8 @@ const authRoutes : Routes = [
   imports: [
     CommonModule,
     MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
     NgxAuthFirebaseUIModule.forRoot(environment.firebase,
     () => "appFactoryName",
     {

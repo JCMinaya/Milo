@@ -5,8 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { MaterialModule } from './material.module';
-import { FormsModule } from '@angular/forms'; 
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
 import { ChartsModule } from 'ng2-charts';
@@ -39,7 +38,7 @@ const appRoutes : Routes = [
     path: "dashboard",  component: DashboardComponent,
     canActivate: [LoggedInGuard],
     children: [
-      {path: 'home', component: HomeComponent},
+      {path: 'home', component:   HomeComponent},
       {path: 'orders', component: OrderComponent},
       {path: 'orders/:page', component: OrderComponent},
       {path: 'products', component: ProductComponent},
